@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "668329999071",
+    "project_id": "swigo-a2cc5",
+    "storage_bucket": "swigo-a2cc5.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:668329999071:android:0a0c1b6ba8cbb831e1c76a",
+        "android_client_info": {
+          "package_name": "com.example.swigo_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDU7h3bNFTLfHI6TlOjsjv2xvBZLKHpWHA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
