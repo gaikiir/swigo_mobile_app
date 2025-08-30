@@ -4,17 +4,18 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:swigo_app/consts/theme_data.dart';
 import 'package:swigo_app/firebase_options.dart';
-import 'package:swigo_app/provider/product_manager_provider.dart';
+import 'package:swigo_app/provider/app_provider.dart';
 import 'package:swigo_app/provider/theme_provider.dart';
 import 'package:swigo_app/root.dart';
 import 'package:swigo_app/screens/admin/admin_dashboard.dart';
 import 'package:swigo_app/screens/auth/login_screen.dart';
 import 'package:swigo_app/screens/auth/register.dart';
 import 'package:swigo_app/screens/cart.dart';
-import 'package:swigo_app/screens/category_display.dart';
 import 'package:swigo_app/screens/home.dart';
 import 'package:swigo_app/screens/inner_screen/product_details.dart';
-import 'package:swigo_app/screens/inner_screen/products.dart';
+import 'package:swigo_app/screens/product/products.dart';
+import 'package:swigo_app/screens/category_screen.dart';
+import 'package:swigo_app/screens/category_products_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -31,7 +32,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => ThemeProvider()),
-        ChangeNotifierProvider(create: (_) => ProductProvider()),
+        ChangeNotifierProvider(create: (_) => AppProvider()),
         
       ],
       child: Consumer<ThemeProvider>(
@@ -48,12 +49,12 @@ class MyApp extends StatelessWidget {
                 ? LoginScreen.routeName
                 : RootScreen.routeName,
             routes: {
-              Products.routeName: (context) => const Products(),
               RootScreen.routeName: (context) => const RootScreen(),
               LoginScreen.routeName: (context) => const LoginScreen(),
               RegisterScreen.routeName: (context) => const RegisterScreen(),
               CartScreen.routeName: (context) => const CartScreen(),
               HomeScreen.routeName: (context) => const HomeScreen(),
+              Products.routeName: (context) => const Products(),
               AdminDashboard.routeName: (context) => const AdminDashboard(),
               CategoryScreen.routeName: (context) => const CategoryScreen(),
             },
@@ -61,6 +62,15 @@ class MyApp extends StatelessWidget {
               if (settings.name == ProductDetailsScreen.routeName) {
                 return MaterialPageRoute(
                   builder: (context) => const ProductDetailsScreen(),
+                  settings: settings,
+                );
+              }
+              if (settings.name == CategoryProductsScreen.routeName) {
+                final categoryName = settings.arguments as String?;
+                return MaterialPageRoute(
+                  builder: (context) => CategoryProductsScreen(
+                    categoryName: categoryName ?? 'All',
+                  ),
                   settings: settings,
                 );
               }
